@@ -83,6 +83,8 @@ const ExpenseItem = (props) => {
     }
   };
 
+  console.log("test");
+
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
@@ -93,11 +95,7 @@ const ExpenseItem = (props) => {
   return (
     <>
       <style>{styles}</style>
-      <img
-        className="mb-3"
-        src={props.image}
-        style={{ width: "100%", height: "220px", objectFit: "contain" }}
-      />
+      <img className="mb-3" src={props.image} style={{ width: "100%", height: "220px", objectFit: "contain" }} />
       <div className="">
         <div className="row justify-content-center">
           <div className="col-md-6">
@@ -111,11 +109,7 @@ const ExpenseItem = (props) => {
 
         <div className="row mb-2">
           <div className="col-md-6">
-            <button
-              className="btn btn-delete"
-              onClick={handleShow}
-              style={{ width: "100%" }}
-            >
+            <button className="btn btn-delete" onClick={handleShow} style={{ width: "100%" }}>
               <FaTrash className="trash-icon" /> Delete
             </button>
           </div>
@@ -142,26 +136,15 @@ const ExpenseItem = (props) => {
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img
-            src="assets/images/dlt.jpg"
-            alt="background"
-            className="img-fluid mt-2 mb-3 mx-auto d-block"
-            style={{ width: "30%" }}
-          />
+          <img src="assets/images/dlt.jpg" alt="background" className="img-fluid mt-2 mb-3 mx-auto d-block" style={{ width: "30%" }} />
 
-          <p className="text-center">
-            Are you sure you want to delete this product?
-          </p>
+          <p className="text-center">Are you sure you want to delete this product?</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button
-            className="btn-delete"
-            variant="danger"
-            onClick={deleteHandler}
-          >
+          <Button className="btn-delete" variant="danger" onClick={deleteHandler}>
             Delete
           </Button>
         </Modal.Footer>
