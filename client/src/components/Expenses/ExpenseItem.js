@@ -84,6 +84,7 @@ const ExpenseItem = (props) => {
   };
 
   console.log("test");
+  console.log("testing");
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
