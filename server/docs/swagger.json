@@ -187,7 +187,7 @@
                           "properties": {
                             "id": {
                               "type": "integer",
-                              "example": "12"
+                              "example": 12
                             },
                             "warehouseName": {
                               "type": "string",
@@ -203,7 +203,7 @@
                             },
                             "address": {
                               "type": "string",
-                              "example": null
+                              "example": "Jl Sudirman Raya"
                             }
                           }
                         },
@@ -311,7 +311,7 @@
                   },
                   "image": {
                     "type": "integer",
-                    "example": null
+                    "example": "https://ik.imagekit.io/test123/IMG-1685202069643_V3uz9HkYJ.png"
                   }
                 }
               }
@@ -354,7 +354,7 @@
                             },
                             "warehouseId": {
                               "type": "integer",
-                              "example": "12"
+                              "example": 12
                             },
                             "updatedAt": {
                               "type": "date",
@@ -366,7 +366,7 @@
                             },
                             "image": {
                               "type": "text",
-                              "example": null
+                              "example": "https://ik.imagekit.io/test123/IMG-1685202069643_V3uz9HkYJ.png"
                             }
                           }
                         }
@@ -408,7 +408,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success created new product",
+            "description": "Success get all product",
             "content": {
               "application/json": {
                 "schema": {
@@ -426,7 +426,7 @@
                           "properties": {
                             "id": {
                               "type": "integer",
-                              "example": "12"
+                              "example": 12
                             },
                             "name": {
                               "type": "string",
@@ -454,7 +454,7 @@
                             },
                             "image": {
                               "type": "text",
-                              "example": null
+                              "example": "https://ik.imagekit.io/test123/IMG-1685202069643_V3uz9HkYJ.png"
                             }
                           }
                         }
@@ -484,7 +484,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success created new product",
+            "description": "Success get product by id",
             "content": {
               "application/json": {
                 "schema": {
@@ -502,7 +502,7 @@
                           "properties": {
                             "id": {
                               "type": "integer",
-                              "example": "12"
+                              "example": 12
                             },
                             "name": {
                               "type": "string",
@@ -522,7 +522,7 @@
                             },
                             "image": {
                               "type": "text",
-                              "example": null
+                              "example": "https://ik.imagekit.io/test123/IMG-1685202069643_V3uz9HkYJ.png"
                             },
                             "updatedAt": {
                               "type": "date",
@@ -545,6 +545,11 @@
       },
       "delete": {
         "tags": ["Products"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -564,20 +569,134 @@
             "description": "Failed delete Product because Product id not found"
           }
         }
+      },
+      "put": {
+        "tags": ["Products"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Success edit product by id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "book"
+                  },
+                  "price": {
+                    "type": "integer",
+                    "example": 100000
+                  },
+                  "stock": {
+                    "type": "integer",
+                    "example": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success edit product by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "newProduct": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 12
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "book"
+                            },
+                            "price": {
+                              "type": "integer",
+                              "example": 100000
+                            },
+                            "stock": {
+                              "type": "integer",
+                              "example": 10
+                            },
+                            "email": {
+                              "type": "text",
+                              "example": "https://ik.imagekit.io/test123/IMG-1685202069643_V3uz9HkYJ.png"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "authorization failed because invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/products/search": {
       "get": {
         "tags": ["Products"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
         "parameters": [
           {
             "in": "query",
-            "name": "name"
+            "name": "name",
+            "required": true
           }
         ],
         "responses": {
           "200": {
-            "description": "get search product",
+            "description": "get search product by name",
             "content": {
               "application/json": {
                 "schema": {
@@ -615,7 +734,7 @@
                             },
                             "image": {
                               "type": "text",
-                              "example": null
+                              "example": "https://ik.imagekit.io/test123/IMG-1685202069643_V3uz9HkYJ.png"
                             },
                             "updatedAt": {
                               "type": "date",
@@ -665,7 +784,7 @@
                           "properties": {
                             "id": {
                               "type": "integer",
-                              "example": "12"
+                              "example": 12
                             },
                             "name": {
                               "type": "string",
@@ -673,7 +792,7 @@
                             },
                             "address": {
                               "type": "string",
-                              "example": null
+                              "example": "Jl Sudirman Raya"
                             },
                             "updatedAt": {
                               "type": "date",
@@ -689,7 +808,7 @@
                             },
                             "image": {
                               "type": "text",
-                              "example": null
+                              "example": "https://ik.imagekit.io/test123/IMG-1685202069643_V3uz9HkYJ.png"
                             }
                           }
                         }
@@ -722,7 +841,7 @@
                     "example": "Toko Ari"
                   },
                   "address": {
-                    "type": "integer",
+                    "type": "string",
                     "example": "jl. sudirman raya"
                   },
                   "owner": {
@@ -736,7 +855,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success Create",
+            "description": "Success Create warehouse",
             "content": {
               "application/json": {
                 "schema": {
@@ -762,7 +881,7 @@
                             },
                             "address": {
                               "type": "string",
-                              "example": null
+                              "example": "Jl Sudirman Raya"
                             },
                             "updatedAt": {
                               "type": "date",
@@ -846,7 +965,7 @@
                             },
                             "address": {
                               "type": "string",
-                              "example": null
+                              "example": "Jl Sudirman Raya"
                             },
                             "updatedAt": {
                               "type": "date",
@@ -941,7 +1060,7 @@
           },
           "image": {
             "type": "text",
-            "example": null
+            "example": "https://ik.imagekit.io/test123/IMG-1685202069643_V3uz9HkYJ.png"
           },
           "warehouseId": {
             "type": "integer",
@@ -966,7 +1085,7 @@
           },
           "address": {
             "type": "string",
-            "example": "jl. sudirman raya"
+            "example": "Jl Sudirman Raya"
           },
           "updatedAt": {
             "type": "date",
@@ -987,7 +1106,7 @@
           },
           "address": {
             "type": "string",
-            "example": "jl. sudirman raya"
+            "example": "Jl Sudirman Raya"
           },
           "image": {
             "type": "array",
